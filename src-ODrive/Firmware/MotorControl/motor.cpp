@@ -216,6 +216,15 @@ bool Motor::arm(PhaseControlLaw<3>* control_law) {
     return true;
 }
 
+float Motor::get_temperature() const {
+    if (!motor_thermistor_.enabled_
+        || motor_thermistor_.adc_channel_ == UINT16_MAX) {
+        return NAN;
+    }
+
+    return motor_thermistor_.temperature_;
+}
+
 /**
  * @brief Updates the phase PWM timings unless the motor is disarmed.
  *
