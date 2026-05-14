@@ -218,8 +218,7 @@ bool Motor::arm(PhaseControlLaw<3>* control_law) {
 
 float Motor::get_temperature() const {
     if (!motor_thermistor_.enabled_
-        || motor_thermistor_.adc_channel_ == UINT16_MAX
-        || is_nan(motor_thermistor_.temperature_)) {
+        || motor_thermistor_.adc_channel_ == UINT16_MAX) {
         return NAN;
     }
 
