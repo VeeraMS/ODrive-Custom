@@ -79,6 +79,22 @@ public:
     bool do_checks(uint32_t timestamp);
     float effective_current_lim();
     float max_available_torque();
+    /**
+     * @brief Returns the current motor thermistor temperature in degrees Celsius.
+     *
+     * Use this helper when callers need the motor temperature without reaching
+     * into the thermistor submodule directly.
+     *
+     * @returns The current motor temperature in °C, or NaN if no valid motor
+     *          temperature is available.
+     *
+     * The return value is NaN in the following error cases:
+     *  - the motor thermistor is disabled
+     *  - the configured thermistor GPIO does not support ADC measurements
+     *  - the thermistor has not produced a valid reading yet, for instance due
+     *    to startup transients, missing data, or sensor failure
+     */
+    float get_temperature() const;
     std::optional<float> phase_current_from_adcval(uint32_t ADCValue);
     bool measure_phase_resistance(float test_current, float max_voltage);
     bool measure_phase_inductance(float test_voltage);
